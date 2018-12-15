@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Read{% endblock %}</h1>
+    <a class="action" href="{{ url_for('poem.index') }}">Generate another</a>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
