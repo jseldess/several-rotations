@@ -1,4 +1,4 @@
-16
+
 
 Arrayed
 
@@ -91,7 +91,7 @@ into the minority proportion of time
 
 The sun isn’t up
 
-15
+
 
 Arrayed out in such a nested way
 I upend my connections to you
@@ -131,7 +131,7 @@ I suspend my connections to you
 
 I upend my connections to you
 
-14
+
 
 The dogs and lillies
 
@@ -1183,7 +1183,7 @@ Top to the street fence and the blue pigeon snapdragon that it isn’t transpare
 
  and time in the train
 
-14
+
 
 May I have your zip code
 I would like your zip code
@@ -1682,7 +1682,7 @@ high up in the architecture
 
 high up in the content architecture
 
-12
+
 
 I had me a vision
 there was no promotion
@@ -2013,7 +2013,7 @@ The company conservatory orangery armory fluency sensory infancy estuary capacit
 
 ASPIRATING
 
-14
+
 
 What the next step
 is pressing
@@ -2090,7 +2090,7 @@ and strategies not tactics
 
 not goals
 
-14
+
 
 What the next step
 is pressing
@@ -2227,7 +2227,7 @@ and strategies not tactics
 
 not goals
 
-12
+
 
 I had me a vision
 there was no promotion
@@ -2313,7 +2313,7 @@ when watching tv
 I am bid to act again
 off the end myself
 
-12
+
 
 I had me a vision
 there was no promotion
@@ -2360,7 +2360,7 @@ The days long aligned
 
 I argued the days were longer
 
-12
+
 
 I had me a vision
 there was no promotion
@@ -2446,7 +2446,7 @@ with little reason to move
 And as an extension of the values
 embodied with little visions
 
-13
+
 
 And as an extension of the values
 I am enjoined to act again
@@ -2610,7 +2610,7 @@ The days of quantity
 
 That company creates a life
 
-12
+
 
 I had me a vision
 there was no promotion
@@ -2706,7 +2706,7 @@ I can hear it between bills and stuff
 
 from which to step off
 
-13
+
 
 Running above broadway
 The ads in mine
@@ -2725,7 +2725,7 @@ falling off the encoded end
 I love my daughter still
 but would I love her the same
 
-11
+
 
 If I take a different measure
 in traversing my purchase
@@ -2872,7 +2872,7 @@ hauling off the end of the world
 
 The first language
 
-12
+
 
 Tomorrow
 may not be ingrained
@@ -2892,7 +2892,7 @@ white spots on a black surface
 Then blue and sun again a second, then night
 off the end of the world
 
-11
+
 
 I resume unassimilable visions
 
@@ -2935,7 +2935,7 @@ Tomorrow
 encoded off the end
 may not be engrained
 
-13
+
 
 Tomorrow
 may not be engrained
@@ -2955,7 +2955,7 @@ may not be engrained
 
 falling off the end of the world
 
-13
+
 
 I reuse indelible tracks
 
@@ -3058,7 +3058,7 @@ encoded off the end
 
 I think I take it out into the snow fall that’s not sticking
 
-11
+
 
 I resume unassimilable visions
 
@@ -3124,7 +3124,7 @@ explicit statements
 up in the television pleasure
 though not many facts up in the sky
 
-11
+
 
 I resume unassimilable visions
 
@@ -3189,7 +3189,7 @@ up in the television
 
 but I can hear them
 
-11
+
 
 I resume unassimilable visions
 
@@ -3243,7 +3243,7 @@ While we’re up in the sky
 
 Though it is not a simple act
 
-12
+
 
 I cannot clear it also through static pleasure
 
@@ -3259,7 +3259,7 @@ You cannot clear it also through static pleasure
 black spots on a white surface
 white spots on a black surface
 
-12
+
 
 I cannot clear it also through static pleasure
 in the simple act of reading
@@ -3301,7 +3301,7 @@ You can hear it also through static leisure
 
 You can clear it also through static leisure
 
-11
+
 
 I resume attributable visions
 
@@ -3324,7 +3324,7 @@ You can hear it also through static leisure
 
 wrapped in static
 
-11
+
 
 I resume attributable visions
 
@@ -3357,7 +3357,7 @@ There lived on the banks of the Havel a horse dealer
 I need an explicit statement
 You can hear it also through your leisure
 
-11
+
 
 I resume attributable visions
 
@@ -3953,7 +3953,7 @@ I came back to me
 Under the grass principle
 having been purchased out
 
-11
+
 
 Then blue and sun again a second, then night
 
@@ -4431,7 +4431,7 @@ Is the weight of my purchases
 
 Is the weight of my click or zipcode
 
-8
+
 
 
 COPY
@@ -4482,7 +4482,7 @@ That I captured an afterimage
 without any further damage
 to any consumer damage
 
-9
+
 
 I captured an afterimage
 without consumer damage
@@ -4506,7 +4506,7 @@ That I captured an afterimage
 without any longer damage
 to any consumer damage
 
-7
+
 
 cells, the movement of cells and the division of cells
 
@@ -4623,7 +4623,7 @@ if there is anything
 to ask in advance
 if that has anything
 
-5
+
 
 I have a memory between the day
 We had inhabited actually
@@ -4636,7 +4636,7 @@ You can hear it also through your leisure
 Which is a pleasure to never live out
 Toward the middle of the sixteenth century
 
-5
+
 
 So I constellate the time family country
 reasons resources
@@ -4769,7 +4769,7 @@ people would be helped
 
 They have very many choices
 
-6
+
 
 The trackers on users
 
@@ -4777,10 +4777,10 @@ More Companies Are Tracking Online Data, Study Finds
 By NATASHA SINGER
 The number of trackers collecting data on users' activities on the most popular Web sites in the United States has significantly increased in the last five months, according to research from the Berkeley Center for Law and Technology at the University of California, Berkeley.
 The Berkeley project, called the "Web Privacy Census," aims to measure online privacy by conducting periodic web crawls and comparing the number of cookies and other types of tracking technology found over time on the most visited sites.
-During a test conducted on Oct. 24, researchers encountered cookies on every site included in a list of the 100 most popular sites compiled by Quantcast, an analytics and audience targeting firm.
-On those 100 sites, researchers found 6,485 standard cookies last month compared with 5,795 cookies in May. In both months, third party trackers, not the Web sites themselves, set a majority of those cookies, the report said.
-In October and May, cookies placed by DoubleClick, Google's ad technology service, appeared on the most sites on the top 100 list. ScorecardResearch, an analytics unit of comScore, was the second-most-prevalent tracker, the researchers reported.
-The number of cookies on the top 1,000 and 25,000 Web sites also increased significantly, researchers said.
+During a test conducted on Oct. , researchers encountered cookies on every site included in a list of the  most popular sites compiled by Quantcast, an analytics and audience targeting firm.
+On those  sites, researchers found , standard cookies last month compared with , cookies in May. In both months, third party trackers, not the Web sites themselves, set a majority of those cookies, the report said.
+In October and May, cookies placed by DoubleClick, Google's ad technology service, appeared on the most sites on the top  list. ScorecardResearch, an analytics unit of comScore, was the second-most-prevalent tracker, the researchers reported.
+The number of cookies on the top , and , Web sites also increased significantly, researchers said.
 "More popular sites are using more cookies," the report said.
 The Berkeley study comes at a time of fierce debate among federal regulators, advertising associations and consumer advocates over how best to regulate online tracking. Marketers advocate self-regulation, allowing consumers who wish to opt out of receiving ads based on data-mining to use an already-established industry program. Some consumer advocates are pushing for federal regulation as well as a "Do Not Track" mechanism that would allow Internet users to control tracking through settings on their own computer browsers.
 Chris Hoofnagle, the director of information privacy programs at the Berkeley center and co-author of the study, said he hoped the data would set a baseline, providing all sides in the debate with empirical information as to the optimum method to regulate tracking.
@@ -4802,7 +4802,7 @@ washed my purchases
 
 I have entered my purposes
 
-6
+
 
 I thought
 people would be helped
@@ -4876,7 +4876,7 @@ where I send and relive aside
 I send and retrieve aside the impulse
 where I stand and relive
 
-6
+
 
 Where in me did I last
 in the form filled offered in trust
@@ -5230,7 +5230,7 @@ and it’s not literal
 
 it can be uncomfortable
 
-5
+
 
 Where in me did I host
 in the form filled offered in trust
@@ -5248,7 +5248,7 @@ I thought
 already formerly a long time
 the ends of my transactions
 
-6
+
 
 I speak to them my possessions
 and move them literally with me
@@ -5279,7 +5279,7 @@ latency which doesn’t mean anything
 
 The floor slanted in places
 
-6
+
 
 I speak to them my possessions
 
@@ -5297,7 +5297,7 @@ formerly a long time they were on
 
 I speak to them my possessions
 
-6
+
 
 Though we are waiting for her
 
@@ -5627,7 +5627,7 @@ answered about
 
 by my memory
 
-5
+
 
 Where in me did I loose
 in the form filled offered trust
@@ -5643,7 +5643,7 @@ by my memory
 I answered about
 washed
 
-4
+
 
 I have entered my phone
 
@@ -5720,7 +5720,7 @@ the way was water
 to the ends of transactions
 though we are waiting for her
 
-5
+
 
 Though we are waiting for her
 
@@ -6283,13 +6283,13 @@ to the other end
 of my actions
 
 Prelude (Fantasy) in A Minor
-44 seconds inside
+ seconds inside
 
 and end up in Bach
-44 seconds in
+ seconds in
 Prelude (Fantasy) in A Minor
 
-I end up 44 seconds in
+I end up  seconds in
 on Bach
 
 on the other end
@@ -6478,7 +6478,7 @@ that is by I am possessed
 that decisions can be attributable
 converting sight into a purchase
 
-4
+
 
 I have entered my phone
 
@@ -6702,7 +6702,7 @@ in data
 By my memory elsewhere
 which I feel formerly about for
 
-4
+
 
 Aligned or not with my interests
 which I feel formerly about for
@@ -6710,7 +6710,7 @@ which I feel formerly about for
 I turn not sad exactly
 not literally moved about
 
-5
+
 
 I thought
 I had entered my phone
@@ -6918,7 +6918,7 @@ which I feel formerly about for
 I returned not sad exactly
 not literally moved
 
-5
+
 
 The right of incurred elections
 
@@ -7032,7 +7032,7 @@ I learned my approximate point
 requesting my standing
 for my own purposes
 
-3 [PASSWORDS]
+ [PASSWORDS]
 
 Possessions people
 
@@ -7056,7 +7056,7 @@ as the right of a surcharge
 
 at the site of a purchase
 
-3 – MEMORIES
+ – MEMORIES
 
 I can’t remember them
 
@@ -7073,7 +7073,7 @@ an irretrievable advantage
 in the long time they were on
 I learned my location
 
-3 – MEMORIES
+ – MEMORIES
 
 I can’t remember them
 
@@ -7162,11 +7162,11 @@ in my
 indented in my own
 and advantaged irretrievably
 
-4 – FREEDOM
+ – FREEDOM
 
 Choose a line
 
-2 – PREAMBLE
+ – PREAMBLE
 
 We ask say in that case
 speech that is of by prospects
@@ -7212,7 +7212,7 @@ phrase them
 that agreed home
 own best form
 
-3 – Memories
+ – Memories
 
 I can’t remember them
 
@@ -7340,7 +7340,7 @@ posterity
 the people in form own
 inure tranquility
 
-We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence,[note 1] promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.
+We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence,[note ] promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.
 
 that agreed one best
 own stays bought loyal
