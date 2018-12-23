@@ -1,15 +1,20 @@
-from dreamp.db import get_db
 from flask import (
-    Blueprint, current_app, flash, g, redirect, render_template, request, url_for
+    current_app, Flask, flash, g, redirect, render_template, request, url_for
 )
+import psycopg2
 import random
 import sys
 from werkzeug.exceptions import abort
 
-bp = Blueprint('poem', __name__)
+
+db = "postgres://root@localhost:26257/dreamp?sslmode=disable"
+conn = psycopg2.connect(db)
+conn.set_session(autocommit=True)
+cur = conn.cursor()
+app = Flask(__name__)
 
 
-@bp.route('/', methods=('GET', 'POST'))
+@app.route('/', methods=('GET', 'POST'))
 def index():
     if request.method == 'POST':
         new_poem = ''
@@ -18,13 +23,11 @@ def index():
         maxlines = request.form.get('maxlines')
         lines_seen = set()
         total_lines = 0
-        db = get_db()
         error = None
 
         if error is not None:
             flash(error)
         else:
-            cur = db.cursor()
             with current_app.open_resource('source.txt') as f:
                 source = f.readlines()
                 while len(source) > 0:
@@ -58,27 +61,32 @@ def index():
             print(new_poem, file=sys.stderr)
             cur.execute(
                 'INSERT INTO poems (body)'
-                ' VALUES (?)',
+                ' VALUES (%s)'
+                ' RETURNING id',
                 (new_poem,)
             )
-            db.commit()
-            id = cur.lastrowid
+            row = cur.fetchone()
+            id = row[0]
             print(id, file=sys.stderr)
-            return redirect(url_for('poem.read', id=id))
+            return redirect(url_for('read', id=id))
 
     return render_template('poem/index.html')
 
 
-@bp.route('/read', methods=('GET',))
-def read():
-    db = get_db()
-    id = request.args['id']
-    poem = db.execute(
-        'SELECT body FROM poems WHERE id = ?',
-        [id]
-    ).fetchone()
+@app.route('/read/<id>', methods=('GET',))
+def read(id):
+    cur.execute(
+        'SELECT body FROM poems WHERE id = %s',
+        (id,)
+    )
+    poem = cur.fetchone()
+    print(poem, file=sys.stderr)
 
     if poem is None:
         abort(404, "Poem id {0} doesn't exist.".format(id))
 
-    return render_template('poem/read.html', poem=poem)
+    return render_template('poem/read.html', poem=poem[0])
+
+
+if __name__ == '__main__':
+    app.run()
