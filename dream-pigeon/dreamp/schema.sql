@@ -1,7 +1,9 @@
 DROP TABLE IF EXISTS poems;
 
 CREATE TABLE poems (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  body TEXT NOT NULL
+  id UUID NOT NULL DEFAULT gen_random_uuid(),
+  created TIMESTAMP NOT NULL DEFAULT current_timestamp():::TIMESTAMP,
+  body STRING NOT NULL,
+  CONSTRAINT "primary" PRIMARY KEY (id ASC),
+  FAMILY "primary" (id, created, body)
 );
