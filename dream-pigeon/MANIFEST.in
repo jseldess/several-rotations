@@ -1,4 +1,0 @@
-include dreamp/schema.sql
-graft dreamp/static
-graft dreamp/templates
-global-exclude *.pyc
