@@ -6,7 +6,7 @@
 
 {% block content %}
   <form method="post">
-    How many lines of text do you want?
+    How many lines of text?
     <select name="max_lines">
       <option value="2">2</option>
       <option value="5">5</option>
@@ -19,10 +19,26 @@
       <option value="100">100</option>
       <option value="">Unlimited</option>
     </select><br>
-    Is it ok to repeat lines?
+    Lines can repeat?
     <select name="repeat">
       <option value="True">Yes</option>
       <option value="False" selected>No</option>
+    </select><br>
+    <!-- Gradually remove words for start of lines?
+    <select name="remove_words_gradual">
+      <option value="True">Yes</option>
+      <option value="False" selected>No</option>
+    </select><br> -->
+    Remove words from the start of each line?
+    <select name="remove_words">
+      <option value="0" selected>0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
     </select><br>
     <input type="submit" value="Submit">
   </form>

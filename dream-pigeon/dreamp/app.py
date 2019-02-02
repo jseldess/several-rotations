@@ -4,6 +4,7 @@ from flask import (
 import jinja2
 import psycopg2
 import random
+import re
 import sys
 from werkzeug.exceptions import abort
 
@@ -21,11 +22,14 @@ def index():
         if max_lines == "":
             max_lines = None
         repeat = request.form.get('repeat')
+        # remove_words_gradual = request.form.get('remove_words_gradual')
+        remove_words = request.form.get('remove_words')
         error = None
 
         if error is not None:
             flash(error)
         else:
+            # Create row for the new poem in the poems table.
             cur.execute(
                 'INSERT INTO poems (body)'
                 ' VALUES (%s)'
@@ -34,11 +38,12 @@ def index():
             )
             row = cur.fetchone()
             id = row[0]
+            # Store the user's generation options for the poem in the state table.
             cur.execute(
-                'INSERT INTO state (poem_id, repeat, max_lines)'
-                ' VALUES (%s, %s, %s)'
+                'INSERT INTO state (poem_id, repeat, max_lines, remove_words)'
+                ' VALUES (%s, %s, %s, %s)'
                 ' RETURNING id',
-                (id, repeat, max_lines)
+                (id, repeat, max_lines, remove_words)
             )
             row = cur.fetchone()
             state_id = row[0]
@@ -54,21 +59,26 @@ def create(id):
     new_poem = ''
     lines_seen = set()
     total_lines = 0
+    # remove_words_index = 0
     error = None
 
     if error is not None:
         flash(error)
     else:
+        # Read the source text into memory and retrieve the user's generation
+        # options for the new poem.
         with current_app.open_resource('source.txt') as f:
             source = f.readlines()
             cur.execute(
-                'SELECT repeat, max_lines from state'
+                'SELECT repeat, max_lines, remove_words from state'
                 ' WHERE poem_id = %s',
                 (id,)
             )
             row = cur.fetchone()
             repeat = row[0]
             max_lines = row[1]
+            remove_words = row[2]
+            # remove_words_gradual = row[3]
             while len(source) > 0:
                 # Break out of the loop once the max lines have been generated.
                 if max_lines != None:
@@ -82,13 +92,27 @@ def create(id):
                 if random.choice([0, 1]) == 1:
                     print("Skip line", file=sys.stderr)
                     continue
+                line = line.decode('utf-8')
+                # if remove_words_gradual == True:
+                #     seq = [i for i in range(1,max_lines + 1)]
+                #     remove_pacing = [seq[i:i + 7] for i in range(0, len(seq), 7)]
+                #     for i in remove_pacing:
+                #         if total_lines in i:
+                #             if remove_pacing.index(i) > remove_words_index:
+                #                 remove_words_index += 1
+                #                 remove_words += 1
+                #     remove_expr = '^' + ('\W*\w+' * remove_words) + '\W*'
+                #     line = re.sub(remove_expr, '', line)
+                # Remove the specified number of words from the start of the line.
+                if remove_words != 0:
+                    remove_expr = '^' + ('\W*\w+' * remove_words) + '\W*'
+                    line = re.sub(remove_expr, '\n', line)
                 # Unless user wants repeat lines, check if the line was seen
                 # in a previous iteration. If so, continue the next iteration.
                 if repeat == False:
                     if line in lines_seen:
                         continue
                     lines_seen.add(line)
-                line = line.decode('utf-8')
                 new_poem += line
                 # Radomly add 0, 1, 2, 3, or 4 empty lines to new_poem.
                 # 0 is weighted heavier.
