@@ -136,6 +136,7 @@ def read(id):
         (id,)
     )
     poem = cur.fetchone()
+    # poem = poem[0].split('\n')
     print(poem, file=sys.stderr)
 
     if poem is None:

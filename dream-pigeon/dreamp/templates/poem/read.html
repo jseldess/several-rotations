@@ -2,6 +2,33 @@
 
 {% block content %}
   <article class="post">
-    <p class="body">{{ poem }}</p>
+    <!-- <script>
+
+      var poem = `{{ poem }}`;
+      var poem = poem.split('\n')
+      console.log(poem);
+
+      var current_line = 0;
+
+      function print_next_line() {
+
+        var t = document.getElementById("poem");
+        var newp = document.createElement("p");
+        var y = document.createTextNode(poem[current_line]+"&nbsp;");
+        newp.appendChild(y)
+        t.appendChild(newp);
+
+        current_line += 1;
+        if (current_line < poem.length) {
+          setTimeout(print_next_line, 100);
+        }
+      }
+      setTimeout(print_next_line, 100);
+    </script> -->
+
+    <div id="poem" class="body">
+      <p>{{ poem }}</p>
+    </div>
+
   </article>
 {% endblock %}
