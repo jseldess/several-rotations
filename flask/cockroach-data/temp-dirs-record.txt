@@ -1,1 +1,0 @@
-/Users/jesseseldess/go/src/github.com/jseldess/several-rotations/flask/cockroach-data/cockroach-temp445637089
