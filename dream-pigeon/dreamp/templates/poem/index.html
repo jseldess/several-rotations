@@ -1,15 +1,41 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Generate a new poem{% endblock %}</h1>
-{% endblock %}
-
 {% block content %}
   <form method="post">
-    <input type="checkbox" name="skip" value="skip" checked> Randomly skip lines<br><br>
-    <input type="checkbox" name="repeat" value="repeat"> Repeat unique lines<br><br>
-    Max number of lines:<br>
-    <input type="text" name="maxlines"><br>
+    How many lines of text?
+    <select name="max_lines">
+      <option value="2">2</option>
+      <option value="5">5</option>
+      <option value="10" selected>10</option>
+      <option value="13">13</option>
+      <option value="21">21</option>
+      <option value="34">34</option>
+      <option value="40">40</option>
+      <option value="56">56</option>
+      <option value="100">100</option>
+      <option value="">Unlimited</option>
+    </select><br>
+    Lines can repeat?
+    <select name="repeat">
+      <option value="True">Yes</option>
+      <option value="False" selected>No</option>
+    </select><br>
+    <!-- Gradually remove words for start of lines?
+    <select name="remove_words_gradual">
+      <option value="True">Yes</option>
+      <option value="False" selected>No</option>
+    </select><br> -->
+    Remove words from the start of each line?
+    <select name="remove_words">
+      <option value="0" selected>0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+    </select><br>
     <input type="submit" value="Submit">
   </form>
 {% endblock %}
