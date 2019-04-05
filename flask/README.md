@@ -16,14 +16,13 @@ This directory contains the Flask web app version of `cli/several-rotations.py`.
 3. Use CockroachDB's [built-in SQL client](https://www.cockroachlabs.com/docs/stable/use-the-built-in-sql-client.html) to create the database schema:
 
     ```
-    cockroach sql --insecure < statements.sql
+    cockroach sql --insecure < schema.sql
     ```
 
 4. Activate a virtualenv:
 
     ```
-    python3 -m venv venv
-    . venv/bin/activate
+    python3 -m venv venv && . venv/bin/activate
     ```
 
 5. Install [Flask](http://flask.pocoo.org/docs/1.0/installation) and [psycopg2](http://initd.org/psycopg/docs/install.html):
@@ -35,6 +34,5 @@ This directory contains the Flask web app version of `cli/several-rotations.py`.
 6. Start the app:
 
     ```
-    export FLASK_ENV=development
-    python3 app.py
+    FLASK_ENV=development python3 app.py
     ```
