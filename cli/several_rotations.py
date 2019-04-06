@@ -24,6 +24,8 @@ Generate file with 100 unique lines, in sections of 10, skipping lines randomly:
     python3 several_rotations.py -u -r -ml 100 -ls 10 -sf source.txt
 Generate file with 100 unique lines of 70 characters or less, in sections of 10:
     python3 several_rotations.py -u -ml 100 -mll 70 -ls 10 -sf source.txt
+Generate file with 10 sections of 10 unique lines, skipping lines randomly:
+    python3 several_rotations.py -u -r -mll 70 -ms 5 -ls 10 -sf source.txt
 """
 
 import argparse
@@ -55,6 +57,8 @@ parser.add_argument("-r", "--random_skip",
                     help="Randomly skip writing lines (default: False)")
 parser.add_argument("-ls", "--lines_per_section", type=int,
                     help="Number of lines of text per section")
+parser.add_argument("-ms", "--max_sections", type=int,
+                    help="Max number of sections")
 parser.add_argument("-ml", "--max_lines", type=int,
                     help="Max number of lines of text in total")
 parser.add_argument("-mll", "--max_line_length", type=int,
@@ -74,9 +78,11 @@ if args.unique_lines:
 if args.random_skip:
     filename += "_skip"
 if args.lines_per_section:
-    filename += "_section" + str(args.lines_per_section)
+    filename += "_sectionlines" + str(args.lines_per_section)
+if args.max_sections:
+    filename += "_maxsections" + str(args.max_sections)
 if args.max_lines:
-    filename += "_max" + str(args.max_lines)
+    filename += "_maxlines" + str(args.max_lines)
 if args.max_line_length:
     filename += "_maxlinelength" + str(args.max_line_length)
 if args.remove_words:
@@ -103,6 +109,9 @@ with open(args.source_file) as file:
         # after specified number of lines.
         if args.lines_per_section:
             if lines_in_section == args.lines_per_section:
+                if args.max_sections:
+                    if section == args.max_sections:
+                        break
                 section += 1
                 new_file.write("\n" + str(section) + "\n\n\n")
                 lines_in_section = 0
@@ -139,8 +148,7 @@ with open(args.source_file) as file:
             new_file.write(random.choice([
             "", "", "", "", "\n", "\n\n", "\n\n\n", "\n\n\n\n"]))
             if args.lines_per_section:
-                if lines_in_section < args.lines_per_section:
-                    lines_in_section += 1
+                lines_in_section += 1
 
 print("File {} created".format(filename))
 print("Total lines: {}".format(total_lines))
