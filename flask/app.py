@@ -18,12 +18,16 @@ app = Flask(__name__)
 @app.route('/', methods=('GET', 'POST'))
 def index():
     if request.method == 'POST':
-        max_lines = request.form.get('max_lines')
-        if max_lines == "":
-            max_lines = None
+        # max_lines = request.form.get('max_lines')
+        # if max_lines == "":
+        #     max_lines = None
+        max_sections = request.form.get('max_sections')
+        if max_sections == "":
+            max_sections = None
+        lines_per_section = request.form.get('lines_per_section')
+        if lines_per_section == "":
+            lines_per_section = None
         repeat = request.form.get('repeat')
-        # remove_words_gradual = request.form.get('remove_words_gradual')
-        remove_words = request.form.get('remove_words')
         error = None
 
         if error is not None:
@@ -40,10 +44,10 @@ def index():
             id = row[0]
             # Store the user's generation options for the poem in the state table.
             cur.execute(
-                'INSERT INTO state (poem_id, repeat, max_lines, remove_words)'
-                ' VALUES (%s, %s, %s, %s)'
+                'INSERT INTO state (poem_id, max_sections, lines_per_section)'
+                ' VALUES (%s, %s, %s)'
                 ' RETURNING id',
-                (id, repeat, max_lines, remove_words)
+                (id, max_sections, lines_per_section)
             )
             row = cur.fetchone()
             state_id = row[0]
@@ -59,7 +63,8 @@ def create(id):
     new_poem = ''
     lines_seen = set()
     total_lines = 0
-    # remove_words_index = 0
+    lines_in_section = 0
+    section = 1
     error = None
 
     if error is not None:
@@ -70,56 +75,53 @@ def create(id):
         with current_app.open_resource('source.txt') as f:
             source = f.readlines()
             cur.execute(
-                'SELECT repeat, max_lines, remove_words from state'
+                'SELECT max_sections, lines_per_section, repeat from state'
                 ' WHERE poem_id = %s',
                 (id,)
             )
             row = cur.fetchone()
-            repeat = row[0]
-            max_lines = row[1]
-            remove_words = row[2]
+            max_sections = row[0]
+            lines_per_section = row[1]
+            repeat = row[2]
             # remove_words_gradual = row[3]
+            new_poem += str(section) + "\n\n\n"
             while len(source) > 0:
                 # Break out of the loop once the max lines have been generated.
-                if max_lines != None:
-                    if total_lines == max_lines:
+                # if max_lines != None:
+                #     if total_lines == max_lines:
+                #         break
+                # Create new section after specified number of lines.
+                if lines_in_section == lines_per_section:
+                    if section == max_sections:
                         break
+                    section += 1
+                    new_poem += "\n\n" + str(section) + "\n\n\n"
+                    lines_in_section = 0
                 # Randomly select a line and remove it from source.
                 line = random.choice(source)
                 source.remove(line)
-                # Randomly skip the line and continue the next iteration.
-                # To increase the chance of skips, add 1s to the list.
-                if random.choice([0, 1]) == 1:
-                    print("Skip line", file=sys.stderr)
-                    continue
-                line = line.decode('utf-8')
-                # if remove_words_gradual == True:
-                #     seq = [i for i in range(1,max_lines + 1)]
-                #     remove_pacing = [seq[i:i + 7] for i in range(0, len(seq), 7)]
-                #     for i in remove_pacing:
-                #         if total_lines in i:
-                #             if remove_pacing.index(i) > remove_words_index:
-                #                 remove_words_index += 1
-                #                 remove_words += 1
-                #     remove_expr = '^' + ('\W*\w+' * remove_words) + '\W*'
-                #     line = re.sub(remove_expr, '', line)
-                # Remove the specified number of words from the start of the line.
-                if remove_words != 0:
-                    remove_expr = '^' + ('\W*\w+' * remove_words) + '\W*'
-                    line = re.sub(remove_expr, '\n', line)
-                # Unless user wants repeat lines, check if the line was seen
-                # in a previous iteration. If so, continue the next iteration.
-                if repeat == False:
-                    if line in lines_seen:
-                        continue
-                    lines_seen.add(line)
-                new_poem += line
-                # Radomly add 0, 1, 2, 3, or 4 empty lines to new_poem.
-                # 0 is weighted heavier.
-                new_poem += random.choice([
-                    "", "", "", "", "\n", "\n\n", "\n\n\n", "\n\n\n\n"])
                 if not line.isspace():
+                    if len(line) > 70:
+                        continue
+                    # Randomly skip the line and continue the next iteration.
+                    # To increase the chance of skips, add 1s to the list.
+                    if random.choice([0, 1]) == 1:
+                        print("Skip line", file=sys.stderr)
+                        continue
+                    line = line.decode('utf-8')
+                    # Unless user wants repeat lines, check if the line was seen
+                    # in a previous iteration. If so, continue the next iteration.
+                    if repeat == False:
+                        if line in lines_seen:
+                            continue
+                        lines_seen.add(line)
+                    new_poem += line
                     total_lines += 1
+                    # Radomly add 0, 1, 2, 3, or 4 empty lines to new_poem.
+                    # 0 is weighted heavier.
+                    new_poem += random.choice([
+                        "", "", "", "", "\n", "\n\n", "\n\n\n", "\n\n\n\n"])
+                    lines_in_section += 1
 
             cur.execute(
                 'UPDATE poems SET body = %s'
@@ -132,17 +134,16 @@ def create(id):
 @app.route('/read/<id>', methods=('GET',))
 def read(id):
     cur.execute(
-        'SELECT body FROM poems WHERE id = %s',
+        'SELECT body, created FROM poems WHERE id = %s',
         (id,)
     )
     poem = cur.fetchone()
-    # poem = poem[0].split('\n')
     print(poem, file=sys.stderr)
 
     if poem is None:
         abort(404, "Poem id {0} doesn't exist.".format(id))
 
-    return render_template('poem/read.html', poem=poem[0])
+    return render_template('poem/read.html', poem=poem[0], created=poem[1])
 
 if __name__ == '__main__':
     app.run()

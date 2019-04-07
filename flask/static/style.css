@@ -16,6 +16,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 1rem 0;
 }
 
+.index {
+  color: #377ba8;
+}
+
 a {
   color: #377ba8;
   text-decoration: none;
@@ -121,6 +125,7 @@ nav ul li a, nav ul li span, header .action {
 
 .content input, .content textarea {
   margin-bottom: 1em;
+  width: 10%;
 }
 
 .content textarea {

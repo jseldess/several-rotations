@@ -12,9 +12,11 @@ CREATE TABLE poems (
 CREATE TABLE state (
   id UUID NOT NULL DEFAULT gen_random_uuid(),
   poem_id UUID NULL,
+  max_sections INT NULL,
+  lines_per_section INT NOT NULL,
   repeat BOOL NULL DEFAULT false,
-  max_lines INT8 NULL,
-  remove_words INT8 NULL,
+  max_lines INT NULL,
+  remove_words INT NULL,
   remove_words_gradual BOOL NULL DEFAULT false,
   CONSTRAINT fk_poem_id_ref_poems FOREIGN KEY (poem_id) REFERENCES poems (id),
   INDEX state_auto_index_fk_poem_id_ref_poems (poem_id ASC),

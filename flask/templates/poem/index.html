@@ -1,41 +1,25 @@
+<nav>
+  <h1 class="index">OUT</h1>
+</nav>
 {% extends 'base.html' %}
-
 {% block content %}
+  </br>
+  <p>This is the last poem of the book of poems, SEVERAL ROTATIONS. If you've read the first sections of the book, what you generate here can be the end for you, or not.</p>
+  <p>Everything you or anyone else generates here is stored in a database and is a cumulative and continuous end to the book as well. Eventually, some or all of it might show up here.</p>
+  <p>The code for this site is at <a href="https://github.com/jseldess/several-rotations/tree/master/flask" target="_blank">https://github.com/jseldess/several-rotations</a>.</p>
+  </br>
   <form method="post">
-    How many lines of text?
-    <select name="max_lines">
-      <option value="2">2</option>
-      <option value="5">5</option>
-      <option value="10" selected>10</option>
-      <option value="13">13</option>
-      <option value="21">21</option>
-      <option value="34">34</option>
-      <option value="40">40</option>
-      <option value="56">56</option>
-      <option value="100">100</option>
-      <option value="">Unlimited</option>
-    </select><br>
-    Lines can repeat?
+    <label for="max_sections">How many sections?</label>
+    <input name="max_sections" id="max_sections" type="number" value="10">
+    <label for="max_sections">Lines of text per section?</label>
+    <input name="lines_per_section" id="lines_per_section" type="number" value="10" required>
+    <!-- <label for="max_lines">Max lines of text?</label>
+    <input name="max_lines" id="max_lines"> -->
+    <label for="repeat">Lines can repeat?</label>
     <select name="repeat">
-      <option value="True">Yes</option>
-      <option value="False" selected>No</option>
+      <option value="True" selected>Yes</option>
+      <option value="False">No</option>
     </select><br>
-    <!-- Gradually remove words for start of lines?
-    <select name="remove_words_gradual">
-      <option value="True">Yes</option>
-      <option value="False" selected>No</option>
-    </select><br> -->
-    Remove words from the start of each line?
-    <select name="remove_words">
-      <option value="0" selected>0</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-    </select><br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Generate">
   </form>
 {% endblock %}
