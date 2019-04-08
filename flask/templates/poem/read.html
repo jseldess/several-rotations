@@ -1,6 +1,43 @@
+<span id="top"></span>
+
 <nav>
-  <a class="action" href="{{ url_for('index') }}"><h1>{{ created }}</h1></a>
+  <h1>{{ created }} UTC <a class="action" href="{{ url_for('index') }}">&larr;</a></h1>
 </nav>
+
+<!-- Adds the back to top link -->
+<h1><a href="#top" id="back-to-top" class="back-to-top" style="display: inline;">&uarr;</a></h1>
+
+<!-- Fades in the button when you scroll down -->
+<script>
+  var link = document.getElementById("back-to-top");
+  var amountScrolled = 1000;
+
+function addClass(el, className) {
+
+    if (el.classList) {
+        el.classList.add(className);
+    } else {
+        el.className += ' ' + className;
+    }
+
+}
+
+function removeClass(el, className) {
+    if (el.classList)
+      el.classList.remove(className);
+    else
+      el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+}
+
+window.addEventListener('scroll', function(e) {
+     if ( window.scrollY > amountScrolled ) {
+         addClass(link, 'show');
+     } else {
+         removeClass(link, 'show');
+     }
+ });
+</script>
+
 {% extends 'base.html' %}
 {% block content %}
   <article class="post">
