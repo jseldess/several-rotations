@@ -1,7 +1,7 @@
-CREATE DATABASE several_rotations;
+CREATE DATABASE IF NOT EXISTS several_rotations;
 USE several_rotations;
 
-CREATE TABLE poems (
+CREATE TABLE IF NOT EXISTS poems (
   id UUID NOT NULL DEFAULT gen_random_uuid(),
   created TIMESTAMP NOT NULL DEFAULT current_timestamp():::TIMESTAMP,
   body STRING NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE poems (
   FAMILY "primary" (id, created, body)
 );
 
-CREATE TABLE state (
+CREATE TABLE IF NOT EXISTS state (
   id UUID NOT NULL DEFAULT gen_random_uuid(),
   poem_id UUID NULL,
   max_sections INT NULL,
