@@ -44,10 +44,10 @@ def index():
             id = row[0]
             # Store the user's generation options for the poem in the state table.
             cur.execute(
-                'INSERT INTO state (poem_id, max_sections, lines_per_section)'
-                ' VALUES (%s, %s, %s)'
+                'INSERT INTO state (poem_id, max_sections, lines_per_section, repeat)'
+                ' VALUES (%s, %s, %s, %s)'
                 ' RETURNING id',
-                (id, max_sections, lines_per_section)
+                (id, max_sections, lines_per_section, repeat)
             )
             row = cur.fetchone()
             state_id = row[0]
