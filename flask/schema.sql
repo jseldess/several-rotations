@@ -17,8 +17,7 @@ CREATE TABLE IF NOT EXISTS state (
   repeat BOOL NULL DEFAULT false,
   max_lines INT NULL,
   remove_words INT NULL,
-  remove_words_gradual BOOL NULL DEFAULT false,
   CONSTRAINT fk_poem_id_ref_poems FOREIGN KEY (poem_id) REFERENCES poems (id),
   INDEX state_auto_index_fk_poem_id_ref_poems (poem_id ASC),
-  FAMILY "primary" (id, poem_id, repeat, max_lines, rowid, remove_words, remove_words_gradual)
+  FAMILY "primary" (id, poem_id, repeat, max_lines, rowid, remove_words)
 );
