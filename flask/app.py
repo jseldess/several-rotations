@@ -1,10 +1,8 @@
 from flask import (
     current_app, Flask, flash, redirect, render_template, request, url_for
 )
-import jinja2
 import psycopg2
 import random
-import re
 import sys
 from werkzeug.exceptions import abort
 
