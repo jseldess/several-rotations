@@ -1,6 +1,7 @@
 # SEVERAL ROTATIONS Flask Web App
 
-This directory contains the Flask web app version of `cli/several-rotations.py`.
+This directory contains the Flask web app version of `cli/several-rotations.py`,
+which is OUT, the last poem of the book SEVERAL ROTATIONS.
 
 1. Install prerequisites:
 
