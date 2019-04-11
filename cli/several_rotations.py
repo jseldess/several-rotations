@@ -1,5 +1,5 @@
 """Create a new file with a random permutation of lines from a source text file,
-formatted to resemble the stanzaic structure of IN, the first section of
+formatted to resemble the stanzaic structure of IN, the first poem of
 SEVERAL ROTATIONS, with options to set a max number of lines, set a max line
 length, break lines into sections, use only unique lines, randomly skip lines,
 and/or remove a specified number of words from the start of lines.
@@ -37,7 +37,7 @@ from time import gmtime, strftime
 parser = argparse.ArgumentParser(
     description="""Create a new file with a random permutation of lines from a
     source text file, formatted to resemble the stanzaic structure of IN, the
-    first section of SEVERAL ROTATIONS, with options to set a max number of lines,
+    first poem of SEVERAL ROTATIONS, with options to set a max number of lines,
     set a max line length, break lines into sections, use only unique lines,
     randomly skip lines, and/or remove a specified number of words from the start
     of lines.""")
