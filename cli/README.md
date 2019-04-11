@@ -15,7 +15,7 @@ and/or remove a specified number of words from the start of lines.
 
 ## Options
 
-``` shell
+```
 -h, --help            show this help message and exit
 -sf SOURCE_FILE, --source_file SOURCE_FILE
                       Source text file (default: source.txt)
