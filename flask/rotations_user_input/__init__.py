@@ -7,7 +7,6 @@ import random
 import sys
 from werkzeug.exceptions import abort
 
-
 def create_app():
     # Create and configure the app.
     app = Flask(__name__, instance_relative_config=True)
@@ -32,44 +31,63 @@ def create_app():
     except OSError:
         pass
 
-
     @app.route('/', methods=('GET', 'POST'))
     def index():
-        max_sections = 10
-        lines_per_section = 10
-        repeat = True
+        if request.method == 'POST':
+            # max_lines = request.form.get('max_lines')
+            # if max_lines == "":
+            #     max_lines = None
+            max_sections = request.form.get('max_sections')
+            if max_sections == "":
+                max_sections = None
+            lines_per_section = request.form.get('lines_per_section')
+            if lines_per_section == "":
+                lines_per_section = None
+            repeat = request.form.get('repeat')
+            error = None
+
+            if error is not None:
+                flash(error)
+            else:
+                # Create row for the new poem in the poems table.
+                cur.execute(
+                    'INSERT INTO poems (body)'
+                    ' VALUES (%s)'
+                    ' RETURNING id',
+                    ('',)
+                )
+                row = cur.fetchone()
+                id = row[0]
+                # Store the user's generation options for the poem in the state table.
+                cur.execute(
+                    'INSERT INTO state (poem_id, max_sections, lines_per_section, repeat)'
+                    ' VALUES (%s, %s, %s, %s)'
+                    ' RETURNING id',
+                    (id, max_sections, lines_per_section, repeat)
+                )
+                row = cur.fetchone()
+                state_id = row[0]
+                # print(id, file=sys.stderr)
+                # print(state_id, file=sys.stderr)
+
+                return redirect(url_for('create', id=id))
+
+        return render_template('poem/index.html')
+
+    @app.route('/create/<id>', methods=('GET', 'POST'))
+    def create(id):
         new_poem = ''
         lines_seen = set()
         total_lines = 0
         lines_in_section = 0
         section = 1
-
         error = None
 
         if error is not None:
             flash(error)
         else:
-            # Create row for the new poem in the poems table.
-            cur.execute(
-                'INSERT INTO poems (body)'
-                ' VALUES (%s)'
-                ' RETURNING id',
-                ('',)
-            )
-            row = cur.fetchone()
-            id = row[0]
-            # Store the user's generation options for the poem in the state table.
-            cur.execute(
-                'INSERT INTO state (poem_id, max_sections, lines_per_section, repeat)'
-                ' VALUES (%s, %s, %s, %s)'
-                ' RETURNING id',
-                (id, max_sections, lines_per_section, repeat)
-            )
-            row = cur.fetchone()
-            state_id = row[0]
-            # print(id, file=sys.stderr)
-            # print(state_id, file=sys.stderr)
-
+            # Read the source text into memory and retrieve the user's generation
+            # options for the new poem.
             with current_app.open_resource('source.txt') as f:
                 source = f.readlines()
                 cur.execute(
@@ -127,30 +145,7 @@ def create_app():
                     (new_poem, id)
                 )
 
-            cur.execute(
-                'SELECT body, created FROM poems WHERE id = %s',
-                (id,)
-            )
-            poem = cur.fetchone()
-            # print(poem, file=sys.stderr)
-
-            if poem is None:
-                abort(404, "Poem id {0} doesn't exist.".format(id))
-
-        return render_template('poem/index.html', poem=poem[0], created=poem[1])
-
-
-    @app.route('/select', methods=('GET',))
-    def select():
-        cur.execute(
-            "SELECT id, created, regexp_extract(body, '^([^\n]*\n){4}([^\n]*)\n.*'), body FROM poems ORDER BY created DESC LIMIT 20",
-        )
-        rows = cur.fetchall()
-
-        r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20 = rows
-
-        return render_template('poem/select.html', r1=r1, r2=r2, r3=r3, r4=r4, r5=r5, r6=r6, r7=r7, r8=r8, r9=r9, r10=r10, r11=r11, r12=r12, r13=r13, r14=r14, r15=r15, r16=r16, r17=r17, r18=r18, r19=r19, r20=r20)
-
+            return redirect(url_for('read', id=id))
 
     @app.route('/read/<id>', methods=('GET',))
     def read(id):
@@ -166,8 +161,7 @@ def create_app():
 
         return render_template('poem/read.html', poem=poem[0], created=poem[1])
 
-    @app.route('/what', methods=('GET',))
-    def what():
-        return render_template('poem/what.html')
-
     return app
+
+# if __name__ == '__main__':
+#     app.run()

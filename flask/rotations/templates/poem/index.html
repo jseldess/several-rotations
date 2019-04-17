@@ -1,25 +1,103 @@
+<span id="top"></span>
+
 <nav>
-  <h1 class="index">SEVERAL ROTATIONS</h1>
+  <h1>{{ created }} UTC</h1>
+  <ul>
+    <li><span id="timer"></li>
+    <li><a href="{{ url_for('select') }}">Recent</a></li>
+    <li><a href="{{ url_for('what') }}">What</a></li>
+  </ul>
 </nav>
+
 {% extends 'base.html' %}
 {% block content %}
-  </br>
-  <p>This is the last poem of the book SEVERAL ROTATIONS. If you've read the first poems of the book, what you generate here can be the end of the book for you, or not.</p>
-  <p>Everything you or anyone else generates here is stored in a database and is a cumulative and continuous end to the book as well. Eventually, some or all of it might show up here.</p>
-  <p>The code for this site is at <a href="https://github.com/jseldess/several-rotations/tree/master/flask" target="_blank">https://github.com/jseldess/several-rotations</a>.</p>
-  </br>
-  <form method="post">
-    <label for="max_sections">How many sections in the poem?</label>
-    <input name="max_sections" id="max_sections" type="number" value="10">
-    <label for="max_sections">How many lines of text per section?</label>
-    <input name="lines_per_section" id="lines_per_section" type="number" value="10" required>
-    <!-- <label for="max_lines">Max lines of text?</label>
-    <input name="max_lines" id="max_lines"> -->
-    <label for="repeat">Can lines repeat?</label>
-    <select name="repeat">
-      <option value="True" selected>Yes</option>
-      <option value="False">No</option>
-    </select><br>
-    <input type="submit" value="Generate">
-  </form>
+  <article class="post">
+    <!-- <script>
+
+      var poem = `{{ poem }}`;
+      var poem = poem.split('\n')
+      console.log(poem);
+
+      var current_line = 0;
+
+      function print_next_line() {
+
+        var t = document.getElementById("poem");
+        var newp = document.createElement("p");
+        var y = document.createTextNode(poem[current_line]+"&nbsp;");
+        newp.appendChild(y)
+        t.appendChild(newp);
+
+        current_line += 1;
+        if (current_line < poem.length) {
+          setTimeout(print_next_line, 100);
+        }
+      }
+      setTimeout(print_next_line, 100);
+    </script> -->
+
+    <div id="poem" class="body">
+      <p>{{ poem }}</p>
+    </div>
+
+    <!-- Adds the back to top link -->
+    <h1><a href="#top" id="back-to-top" class="back-to-top" style="display: inline;">&uarr;</a></h1>
+
+  </article>
+
+  <script>
+    // Countdown clock to next auto-generation
+    document.getElementById('timer').innerHTML =
+      10 + ":" + 01;
+    startTimer();
+
+    function startTimer() {
+      var presentTime = document.getElementById('timer').innerHTML;
+      var timeArray = presentTime.split(/[:]+/);
+      var m = timeArray[0];
+      var s = checkSecond((timeArray[1] - 1));
+      if(s == 59){m = m-1}
+      if(presentTime == "0:01") {location.reload();}
+
+      document.getElementById('timer').innerHTML =
+        m + ":" + s;
+      setTimeout(startTimer, 1000);
+    }
+
+    function checkSecond(sec) {
+      if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+      if (sec < 0) {sec = "59"};
+      return sec;
+    }
+
+    // Fades in the button when you scroll down
+      var link = document.getElementById("back-to-top");
+      var amountScrolled = 1000;
+
+    function addClass(el, className) {
+
+        if (el.classList) {
+            el.classList.add(className);
+        } else {
+            el.className += ' ' + className;
+        }
+
+    }
+
+    function removeClass(el, className) {
+        if (el.classList)
+          el.classList.remove(className);
+        else
+          el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+    }
+
+    window.addEventListener('scroll', function(e) {
+         if ( window.scrollY > amountScrolled ) {
+             addClass(link, 'show');
+         } else {
+             removeClass(link, 'show');
+         }
+     });
+  </script>
+
 {% endblock %}

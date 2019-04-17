@@ -1,0 +1,16 @@
+<nav>
+  <h1>WHAT</h1>
+  <ul>
+    <li><a href="{{ url_for('index') }}">Now</a></li>
+    <li><a href="{{ url_for('select') }}">Recent</a></li>
+  </ul>
+</nav>
+{% extends 'base.html' %}
+{% block content %}
+  </br>
+  <p>This site is the poem OUT, the last poem of the book SEVERAL ROTATIONS.</p>
+  <p>When you go to <a href="{{ url_for('index') }}">NOW</a>, or refresh that page, you extend this poem. After 10 minutes on NOW, a new extension is generated automatically.</p>
+  <p>Everything generated here is stored in a database and is a cumulative and contiuous end to the book. You can access some of the most recently generated extensions on <a href="{{ url_for('select') }}">RECENT</a>.</p>
+  <p>The code for this site is at <a href="https://github.com/jseldess/several-rotations/tree/master/flask" target="_blank">https://github.com/jseldess/several-rotations</a>.</p>
+  </br>
+{% endblock %}
