@@ -1,12 +1,7 @@
 <span id="top"></span>
 
 <nav>
-  <h1>{{ created }} UTC</h1>
-  <ul>
-    <li><a href="{{ url_for('index') }}">Now</a></li>
-    <li><a href="{{ url_for('select') }}">Recent</a></li>
-    <li><a href="{{ url_for('what' )}}">Out</a></li>
-  </ul>
+  <h1>{{ created }} UTC <a class="action" href="{{ url_for('index') }}">&larr;</a></h1>
 </nav>
 
 <!-- Adds the back to top link -->
@@ -75,36 +70,4 @@ window.addEventListener('scroll', function(e) {
     </div>
 
   </article>
-
-  <script>
-    // Fades in the button when you scroll down
-      var link = document.getElementById("back-to-top");
-      var amountScrolled = 1000;
-
-    function addClass(el, className) {
-
-        if (el.classList) {
-            el.classList.add(className);
-        } else {
-            el.className += ' ' + className;
-        }
-
-    }
-
-    function removeClass(el, className) {
-        if (el.classList)
-          el.classList.remove(className);
-        else
-          el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-    }
-
-    window.addEventListener('scroll', function(e) {
-         if ( window.scrollY > amountScrolled ) {
-             addClass(link, 'show');
-         } else {
-             removeClass(link, 'show');
-         }
-     });
-  </script>
-
 {% endblock %}

@@ -131,5 +131,13 @@ which is the last poem of the book SEVERAL ROTATIONS.
 3. Restart the app:
 
     ```
+    export FLASK_APP=rotations
+    ```
+
+    ```
+    export FLASK_ENV=development
+    ```
+
+    ```
     flask run
     ```
