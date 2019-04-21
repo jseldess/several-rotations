@@ -143,7 +143,7 @@ def create_app():
     @app.route('/select', methods=('GET',))
     def select():
         cur.execute(
-            "SELECT id, created, regexp_extract(body, '^([^\n]*\n){4}([^\n]*)\n.*'), body FROM poems ORDER BY created DESC LIMIT 20",
+            "SELECT id, created, regexp_extract(body, '^([^\n]*\n){4}([^\n]*)\n.*') FROM poems ORDER BY created DESC LIMIT 20",
         )
         rows = cur.fetchall()
 
@@ -165,6 +165,7 @@ def create_app():
             abort(404, "Poem id {0} doesn't exist.".format(id))
 
         return render_template('poem/read.html', poem=poem[0], created=poem[1])
+
 
     @app.route('/what', methods=('GET',))
     def what():
