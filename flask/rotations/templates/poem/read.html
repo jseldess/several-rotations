@@ -5,75 +5,20 @@
   <ul>
     <li><a href="{{ url_for('index') }}">Now</a></li>
     <li><a href="{{ url_for('select') }}">Recent</a></li>
-    <li><a href="{{ url_for('what' )}}">Out</a></li>
+    <li><a href="{{ url_for('about' )}}">About</a></li>
   </ul>
 </nav>
 
-<!-- Adds the back to top link -->
-<h1><a href="#top" id="back-to-top" class="back-to-top" style="display: inline;">&uarr;</a></h1>
-
-<!-- Fades in the button when you scroll down -->
-<script>
-  var link = document.getElementById("back-to-top");
-  var amountScrolled = 1000;
-
-function addClass(el, className) {
-
-    if (el.classList) {
-        el.classList.add(className);
-    } else {
-        el.className += ' ' + className;
-    }
-
-}
-
-function removeClass(el, className) {
-    if (el.classList)
-      el.classList.remove(className);
-    else
-      el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-}
-
-window.addEventListener('scroll', function(e) {
-     if ( window.scrollY > amountScrolled ) {
-         addClass(link, 'show');
-     } else {
-         removeClass(link, 'show');
-     }
- });
-</script>
-
 {% extends 'base.html' %}
+
 {% block content %}
+
   <article class="post">
-    <!-- <script>
-
-      var poem = `{{ poem }}`;
-      var poem = poem.split('\n')
-      console.log(poem);
-
-      var current_line = 0;
-
-      function print_next_line() {
-
-        var t = document.getElementById("poem");
-        var newp = document.createElement("p");
-        var y = document.createTextNode(poem[current_line]+"&nbsp;");
-        newp.appendChild(y)
-        t.appendChild(newp);
-
-        current_line += 1;
-        if (current_line < poem.length) {
-          setTimeout(print_next_line, 100);
-        }
-      }
-      setTimeout(print_next_line, 100);
-    </script> -->
-
     <div id="poem" class="body">
       <p>{{ poem }}</p>
     </div>
-
+    <!-- Adds the back to top link -->
+    <h1><a href="#top" id="back-to-top" class="back-to-top" style="display: inline;">&uarr;</a></h1>
   </article>
 
   <script>

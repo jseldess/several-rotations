@@ -12,9 +12,9 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Mono', monospace;
   margin: 1rem 0;
-  color: #377ba8;
+  /* color: #377ba8; */
 }
 
 a {
@@ -162,17 +162,6 @@ select {
     box-sizing: border-box;
     border-radius: 0%;
 }
-
-  /* a.back-to-top {
-    font-weight: 1000;
-    letter-spacing: 2px;
-    font-size: 14px;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 1.6;
-    padding-left: 2px;
-    padding-top: 14px;
-} */
 
   .back-to-top.show {
        opacity: 1;
