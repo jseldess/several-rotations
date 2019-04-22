@@ -167,8 +167,8 @@ def create_app():
         return render_template('poem/read.html', poem=poem[0], created=poem[1])
 
 
-    @app.route('/what', methods=('GET',))
-    def what():
-        return render_template('poem/what.html')
+    @app.route('/about', methods=('GET',))
+    def about():
+        return render_template('poem/about.html')
 
     return app
