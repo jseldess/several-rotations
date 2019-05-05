@@ -3,7 +3,7 @@
 <nav>
   <h1>{{ created }} UTC</h1>
   <ul>
-    <li><span id="timer"></li>
+    <!-- <li><span id="timer"></li> -->
     <li><a href="{{ url_for('select') }}">Recent</a></li>
     <li><a href="{{ url_for('about') }}">About</a></li>
   </ul>
@@ -21,7 +21,7 @@
     <h1><a href="#top" id="back-to-top" class="back-to-top" style="display: inline;">&uarr;</a></h1>
   </article>
 
-  <script>
+  <!-- <script>
     // Countdown clock to next auto-generation
     document.getElementById('timer').innerHTML =
       10 + ":" + 01;
@@ -74,6 +74,6 @@
              removeClass(link, 'show');
          }
      });
-  </script>
+  </script> -->
 
 {% endblock %}
