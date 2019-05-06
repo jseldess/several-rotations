@@ -35,6 +35,25 @@ def create_app():
 
     @app.route('/', methods=('GET', 'POST'))
     def index():
+        error = None
+
+        if error is not None:
+            flash(error)
+        else:
+            cur.execute(
+                'SELECT body, created FROM poems ORDER BY created DESC LIMIT 1'
+            )
+            poem = cur.fetchone()
+            # print(poem, file=sys.stderr)
+
+            if poem is None:
+                abort(404, "Poem id {0} doesn't exist.".format(id))
+
+        return render_template('poem/index.html', poem=poem[0], created=poem[1])
+
+
+    @app.route('/create', methods=('GET', 'POST'))
+    def create():
         max_sections = 10
         lines_per_section = 10
         repeat = True
@@ -127,18 +146,7 @@ def create_app():
                     (new_poem, id)
                 )
 
-            cur.execute(
-                'SELECT body, created FROM poems WHERE id = %s',
-                (id,)
-            )
-            poem = cur.fetchone()
-            # print(poem, file=sys.stderr)
-
-            if poem is None:
-                abort(404, "Poem id {0} doesn't exist.".format(id))
-
-        return render_template('poem/index.html', poem=poem[0], created=poem[1])
-
+        return ('', 204)
 
     @app.route('/select', methods=('GET',))
     def select():
