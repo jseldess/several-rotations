@@ -21,34 +21,34 @@
     <h1><a href="#top" id="back-to-top" class="back-to-top" style="display: inline;">&uarr;</a></h1>
   </article>
 
-  <!-- <script>
+  <script>
     // Countdown clock to next auto-generation
-    document.getElementById('timer').innerHTML =
-      10 + ":" + 01;
-    startTimer();
+    // document.getElementById('timer').innerHTML =
+    //   10 + ":" + 01;
+    // startTimer();
+    //
+    // function startTimer() {
+    //   var presentTime = document.getElementById('timer').innerHTML;
+    //   var timeArray = presentTime.split(/[:]+/);
+    //   var m = timeArray[0];
+    //   var s = checkSecond((timeArray[1] - 1));
+    //   if(s == 59){m = m-1}
+    //   if(presentTime == "0:01") {location.reload();}
+    //
+    //   document.getElementById('timer').innerHTML =
+    //     m + ":" + s;
+    //   setTimeout(startTimer, 1000);
+    // }
+    //
+    // function checkSecond(sec) {
+    //   if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+    //   if (sec < 0) {sec = "59"};
+    //   return sec;
+    // }
 
-    function startTimer() {
-      var presentTime = document.getElementById('timer').innerHTML;
-      var timeArray = presentTime.split(/[:]+/);
-      var m = timeArray[0];
-      var s = checkSecond((timeArray[1] - 1));
-      if(s == 59){m = m-1}
-      if(presentTime == "0:01") {location.reload();}
-
-      document.getElementById('timer').innerHTML =
-        m + ":" + s;
-      setTimeout(startTimer, 1000);
-    }
-
-    function checkSecond(sec) {
-      if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
-      if (sec < 0) {sec = "59"};
-      return sec;
-    }
-
-    // Fades in the button when you scroll down
-      var link = document.getElementById("back-to-top");
-      var amountScrolled = 1000;
+    // Fades in the back-to-top icon when you scroll down
+    var link = document.getElementById("back-to-top");
+    var amountScrolled = 1000;
 
     function addClass(el, className) {
 
@@ -74,6 +74,6 @@
              removeClass(link, 'show');
          }
      });
-  </script> -->
+  </script>
 
 {% endblock %}
