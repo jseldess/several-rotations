@@ -33,7 +33,10 @@ def create_app():
         pass
 
 
-    @app.route('/', methods=('GET', 'POST'))
+    # Retrieve the most recent poem and the IDs of the previous and next poems
+    # and pass it all to the index template. This endpoint is called when a user
+    # lands on the homepage or selects "Latest" from the topnav (all templates).
+    @app.route('/', methods=('GET',))
     def index():
         error = None
 
@@ -41,20 +44,28 @@ def create_app():
             flash(error)
         else:
             cur.execute(
-                'SELECT body, created FROM poems ORDER BY created DESC LIMIT 1'
+                'SELECT body, created, id FROM poems ORDER BY created DESC LIMIT 1'
             )
             poem = cur.fetchone()
+            id = poem[2]
             # print(poem, file=sys.stderr)
 
             if poem is None:
                 abort(404, "Poem id {0} doesn't exist.".format(id))
 
-        return render_template('poem/index.html', poem=poem[0], created=poem[1])
+            cur.execute(
+                'SELECT previous FROM (SELECT lag(id, 1) OVER w AS previous, id AS current FROM poems WINDOW w AS (ORDER BY created ASC)) WHERE current = %s',
+                (id,)
+            )
+            previous = cur.fetchone()
+            previous = previous[0]
 
+        return render_template('poem/index.html', poem=poem[0], created=poem[1], id=id, previous=previous)
 
+    # Generate a new poem. This endpoint is called by a cronjob once a day.
     @app.route('/create', methods=('GET', 'POST'))
     def create():
-        max_sections = 10
+        max_sections = 1
         lines_per_section = 10
         repeat = True
         new_poem = ''
@@ -101,7 +112,7 @@ def create_app():
                 lines_per_section = row[1]
                 repeat = row[2]
                 # remove_words_gradual = row[3]
-                new_poem += str(section) + "\n\n\n"
+                new_poem += "--" + "\n\n\n"
                 while len(source) > 0:
                     # Break out of the loop once the max lines have been generated.
                     # if max_lines != None:
@@ -112,7 +123,7 @@ def create_app():
                         if section == max_sections:
                             break
                         section += 1
-                        new_poem += "\n\n" + str(section) + "\n\n\n"
+                        new_poem += "\n\n" + "--" + "\n\n\n"
                         lines_in_section = 0
                     # Randomly select a line and remove it from source.
                     line = random.choice(source)
@@ -148,6 +159,10 @@ def create_app():
 
         return ('', 204)
 
+
+    # Retrieve the ID, creation timestamp, and first line of the 20 most recent
+    # poems and pass it all to the select template. This endpoint is called
+    # when a user selects "Recent" from the topnav (all templates).
     @app.route('/select', methods=('GET',))
     def select():
         cur.execute(
@@ -160,6 +175,9 @@ def create_app():
         return render_template('poem/select.html', r1=r1, r2=r2, r3=r3, r4=r4, r5=r5, r6=r6, r7=r7, r8=r8, r9=r9, r10=r10, r11=r11, r12=r12, r13=r13, r14=r14, r15=r15, r16=r16, r17=r17, r18=r18, r19=r19, r20=r20)
 
 
+    # Retrieve a specific poem and the IDs of the previous and next poems and
+    # pass it all to the read template. This endpoint is called when a user
+    # selects a poem on the "Recent" page (select template).
     @app.route('/read/<id>', methods=('GET',))
     def read(id):
         cur.execute(
@@ -172,9 +190,19 @@ def create_app():
         if poem is None:
             abort(404, "Poem id {0} doesn't exist.".format(id))
 
-        return render_template('poem/read.html', poem=poem[0], created=poem[1])
+        cur.execute(
+            'SELECT previous,next FROM (SELECT lag(id, 1) OVER w AS previous, id AS current, lead(id, 1) OVER w AS next FROM poems WINDOW w AS (ORDER BY created ASC)) WHERE current = %s',
+            (id,)
+        )
+        previous_next = cur.fetchone()
+        previous = previous_next[0]
+        next = previous_next[1]
+
+        return render_template('poem/read.html', poem=poem[0], created=poem[1], id=id, previous=previous, next=next)
 
 
+    # Show information about the site. This endpoint is called when a user
+    # selects "About" from the topnav (all templates).
     @app.route('/about', methods=('GET',))
     def about():
         return render_template('poem/about.html')
