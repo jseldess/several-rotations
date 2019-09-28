@@ -19,7 +19,7 @@
     </div>
     <p></p>
     <p>--</p>
-    <p style="font-size: 17px"><a class="action" id="paginate" href="{{ url_for('read', id=previous) }}">Previous</a>{% if next %} / <a class="action" id="paginate" href="{{ url_for('read', id=next) }}">Next</a>{% endif %}</p>
+    <p style="font-size: 17px">{% if previous %}<a class="action" id="paginate" href="{{ url_for('read', id=previous) }}">Previous</a>{% endif %} / {% if next %}<a class="action" id="paginate" href="{{ url_for('read', id=next) }}">Next</a>{% endif %}</p>
     <!-- Adds the back to top link -->
     <h1><a href="#top" id="back-to-top" class="back-to-top" style="display: inline;">&uarr;</a></h1>
   </article>

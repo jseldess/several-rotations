@@ -50,9 +50,6 @@ def create_app():
             id = poem[2]
             # print(poem, file=sys.stderr)
 
-            if poem is None:
-                abort(404, "Poem id {0} doesn't exist.".format(id))
-
             cur.execute(
                 'SELECT previous FROM (SELECT lag(id, 1) OVER w AS previous, id AS current FROM poems WINDOW w AS (ORDER BY created ASC)) WHERE current = %s',
                 (id,)
@@ -61,6 +58,7 @@ def create_app():
             previous = previous[0]
 
         return render_template('poem/index.html', poem=poem[0], created=poem[1], id=id, previous=previous)
+
 
     # Generate a new poem. This endpoint is called by a cronjob once a day.
     @app.route('/create', methods=('GET', 'POST'))
@@ -163,16 +161,49 @@ def create_app():
     # Retrieve the ID, creation timestamp, and first line of the 20 most recent
     # poems and pass it all to the select template. This endpoint is called
     # when a user selects "Recent" from the topnav (all templates).
-    @app.route('/select', methods=('GET',))
+    @app.route('/select', methods=('GET', 'POST'))
     def select():
+        # Get the ID, creation date, and first line of the 10 most recent poems.
         cur.execute(
-            "SELECT id, created, regexp_extract(body, '^([^\n]*\n){4}([^\n]*)\n.*') FROM poems ORDER BY created DESC LIMIT 20",
+            "SELECT id, created, regexp_extract(body, '^([^\n]*\n){4}([^\n]*)\n.*') FROM poems ORDER BY created DESC LIMIT 10",
         )
         rows = cur.fetchall()
+        r1, r2, r3, r4, r5, r6, r7, r8, r9, r10 = rows
 
-        r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20 = rows
+        # Get the creation date of the oldest poem. This is used to make earlier
+        # dates unselectable in the date selector on the select template.
+        cur.execute(
+            "SELECT created FROM poems ORDER BY created ASC LIMIT 1",
+        )
+        earliest = cur.fetchall()[0][0]
+        # print(earliest, file=sys.stderr)
 
-        return render_template('poem/select.html', r1=r1, r2=r2, r3=r3, r4=r4, r5=r5, r6=r6, r7=r7, r8=r8, r9=r9, r10=r10, r11=r11, r12=r12, r13=r13, r14=r14, r15=r15, r16=r16, r17=r17, r18=r18, r19=r19, r20=r20)
+        # Get the creation date of the latest poem. This is used to make later
+        # dates unselectable in the date selector on the select template.
+        cur.execute(
+            "SELECT created FROM poems ORDER BY created DESC LIMIT 1",
+        )
+        latest = cur.fetchall()[0][0]
+        # print(latest, file=sys.stderr)
+
+        # When the date selector on the select template is used, get the
+        # corresponding poem.
+        message = ''
+        if request.method == 'POST':
+            day_select = request.form.get('day')
+            # print(day_select, file=sys.stderr)
+            cur.execute(
+                'SELECT id FROM poems WHERE created > %s ORDER BY created ASC LIMIT 1;',
+                (day_select,)
+            )
+            row = cur.fetchone()
+            # print(row, file=sys.stderr)
+            if row is None:
+                message = 'No poem generated on that date. Choose another.'
+            else:
+                return redirect(url_for('read', id=row[0]))
+
+        return render_template('poem/select.html', r1=r1, r2=r2, r3=r3, r4=r4, r5=r5, r6=r6, r7=r7, r8=r8, r9=r9, r10=r10, earliest=earliest, latest=latest, message=message)
 
 
     # Retrieve a specific poem and the IDs of the previous and next poems and
@@ -186,9 +217,6 @@ def create_app():
         )
         poem = cur.fetchone()
         # print(poem, file=sys.stderr)
-
-        if poem is None:
-            abort(404, "Poem id {0} doesn't exist.".format(id))
 
         cur.execute(
             'SELECT previous,next FROM (SELECT lag(id, 1) OVER w AS previous, id AS current, lead(id, 1) OVER w AS next FROM poems WINDOW w AS (ORDER BY created ASC)) WHERE current = %s',
