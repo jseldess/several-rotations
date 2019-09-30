@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS poems (
   created TIMESTAMP NOT NULL DEFAULT current_timestamp():::TIMESTAMP,
   body STRING NOT NULL,
   CONSTRAINT "primary" PRIMARY KEY (id ASC),
+  INDEX poems_created_idx (created ASC),
   FAMILY "primary" (id, created, body)
 );
 
