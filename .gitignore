@@ -13,6 +13,7 @@ coverage.xml
 # Flask stuff:
 instance/
 .webassets-cache
+flask/.DS_Store
 
 # pyenv
 .python-version
