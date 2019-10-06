@@ -14,6 +14,7 @@ coverage.xml
 instance/
 .webassets-cache
 flask/.DS_Store
+cli/.DS_Store
 
 # pyenv
 .python-version
