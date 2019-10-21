@@ -14,7 +14,8 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto Mono', monospace;
   margin: 1rem 0;
-  /* color: #377ba8; */
+  /* color: #8800cc; */
+  /* color: #cc99ff; */
 }
 
 a {
@@ -53,7 +54,7 @@ nav li {
   font-size: 17px;
 }
 
-nav ul  {
+nav ul {
   display: flex;
   list-style: none;
   margin: 0;
@@ -63,6 +64,8 @@ nav ul  {
 nav ul li a, nav ul li span, header .action {
   display: block;
   padding: 0.5rem;
+  /* color: #0099ff; */
+  /* color: #8800cc; */
 }
 
 .content {
@@ -174,4 +177,10 @@ table {
 th {
   text-align: left;
   padding-bottom: 20px;
+}
+
+#poem > p {
+  background: -webkit-linear-gradient(#8800cc, #0099ff, #009999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
