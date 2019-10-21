@@ -1,6 +1,6 @@
 # SEVERAL ROTATIONS Flask Web App
 
-This directory contains the Flask web app version of `cli/several-rotations.py`, deployed at [http://several-rotations.org](http://several-rotations.org). The site is the poem OUT, the last poem of the book SEVERAL ROTATIONS.
+This directory contains the Flask web app version of `cli/several-rotations.py`, deployed at [http://several-rotations.org](http://several-rotations.org). The site is the poem OUT, the last poem of the book [SEVERAL ROTATIONS](https://www.kenningeditions.com/shop/several-rotations/).
 
 - [Start](#start)
 - [Stop](#stop)
