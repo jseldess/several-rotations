@@ -38,7 +38,7 @@ def create_app():
     # lands on the homepage or selects "Latest" from the topnav (all templates).
     @app.route('/', methods=('GET',))
     def index():
-        gradient = ['#8800cc', '#0099ff', '#009999']
+        gradient = ['#000000', '#000000', '#000000', '#000000', '#000000', '#000000', '#8800cc', '#0099ff', '#009999']
         error = None
 
         if error is not None:
@@ -213,7 +213,7 @@ def create_app():
     # selects a poem on the "Recent" page (select template).
     @app.route('/read/<id>', methods=('GET',))
     def read(id):
-        gradient = ['#8800cc', '#0099ff', '#009999']
+        gradient = ['#000000', '#000000', '#000000', '#000000', '#000000', '#000000', '#8800cc', '#0099ff', '#009999']
 
         cur.execute(
             'SELECT body, created FROM poems WHERE id = %s',
