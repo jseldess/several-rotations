@@ -178,10 +178,3 @@ th {
   text-align: left;
   padding-bottom: 20px;
 }
-
-#poem > p {
-  background: -webkit-linear-gradient(#000000, #8800cc);
-  /* background: -webkit-linear-gradient(#000000, #8800cc, #0099ff, #009999); */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
