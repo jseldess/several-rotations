@@ -15,12 +15,11 @@ def create_app():
     conn = psycopg2.connect(
         database='several_rotations',
         user='app',
-        sslmode='require',
-        sslrootcert='certs/ca.crt',
-        sslkey='certs/client.app.key',
-        sslcert='certs/client.app.crt',
+        sslmode='verify-full',
+        password='<password>',
         port='26257',
-        host='localhost',
+        host='free-tier11.gcp-us-east1.cockroachlabs.cloud',
+        options='--cluster=cheeky-chimp-1612',
         application_name='rotations'
 )
     conn.set_session(autocommit=True)
