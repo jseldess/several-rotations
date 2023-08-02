@@ -1,5 +1,0 @@
-include rotations/schema.sql
-include rotations/source.txt
-graft rotations/static
-graft rotations/templates
-global-exclude *.pyc
