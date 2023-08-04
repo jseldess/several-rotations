@@ -65,7 +65,7 @@ def index():
     return render_template('poem/index.html', poem=poem[0], created=poem[1], id=id, previous=previous)
 
 
-# Generate a new poem. This endpoint is called by a cronjob once a day.
+# Generate a new poem. This endpoint is called hourly by scheduler.
 @app.route('/create', methods=('GET', 'POST'))
 def create():
     max_sections = 1
@@ -163,7 +163,7 @@ def create():
     return ('', 204)
 
 
-# Schedule poem generation for once per day.
+# Schedule hourly poem generation.
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=create, trigger="interval", days=1)
 scheduler.start()
