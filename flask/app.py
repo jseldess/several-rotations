@@ -1,10 +1,18 @@
-from flask import (
-    current_app, Flask, flash, redirect, render_template, request, url_for
-)
 import os
-import psycopg2
 import random
 # import sys
+
+from apscheduler.schedulers.background import BackgroundScheduler
+from flask import (
+    current_app, 
+    Flask, 
+    flash, 
+    redirect, 
+    render_template, 
+    request, 
+    url_for
+    )
+import psycopg2
 
 
 # Create and configure the app.
@@ -153,6 +161,12 @@ def create():
             )
 
     return ('', 204)
+
+
+# Schedule poem generation for once per day.
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=create, trigger="interval", days=1)
+scheduler.start()
 
 
 # Retrieve the ID, creation timestamp, and first line of the 20 most recent
