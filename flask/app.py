@@ -165,7 +165,7 @@ def create():
 
 # Schedule hourly poem generation.
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=create, trigger="interval", days=1)
+scheduler.add_job(func=create, trigger="interval", minutes=2)
 scheduler.start()
 
 
