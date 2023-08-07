@@ -64,7 +64,7 @@ def index():
     return render_template('poem/index.html', poem=poem[0], created=poem[1], id=id, previous=previous)
 
 
-# Generate a new poem.
+# Generate a new poem. A cronjob calls this endpoing hourly.
 @app.route('/create', methods=('GET', 'POST'))
 def create():
     max_sections = 1
