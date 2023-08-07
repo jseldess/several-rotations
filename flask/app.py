@@ -2,7 +2,6 @@ import os
 import random
 # import sys
 
-from apscheduler.schedulers.background import BackgroundScheduler
 from flask import (
     current_app, 
     Flask, 
@@ -65,7 +64,7 @@ def index():
     return render_template('poem/index.html', poem=poem[0], created=poem[1], id=id, previous=previous)
 
 
-# Generate a new poem. This endpoint is called hourly by scheduler.
+# Generate a new poem.
 @app.route('/create', methods=('GET', 'POST'))
 def create():
     max_sections = 1
@@ -161,12 +160,6 @@ def create():
             )
 
     return ('', 204)
-
-
-# Schedule hourly poem generation.
-scheduler = BackgroundScheduler()
-scheduler.add_job(func=create, trigger="interval", days=1)
-scheduler.start()
 
 
 # Retrieve the ID, creation timestamp, and first line of the 20 most recent
