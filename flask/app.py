@@ -162,17 +162,17 @@ def create():
     return ('', 204)
 
 
-# Retrieve the ID, creation timestamp, and first line of the 20 most recent
+# Retrieve the ID, creation timestamp, and first line of the 24 most recent
 # poems and pass it all to the select template. This endpoint is called
 # when a user selects "Recent" from the topnav (all templates).
 @app.route('/select', methods=('GET', 'POST'))
 def select():
     # Get the ID, creation date, and first line of the 10 most recent poems.
     cur.execute(
-        "SELECT id, created, regexp_extract(body, '^([^\n]*\n){4}([^\n]*)\n.*') FROM poems ORDER BY created DESC LIMIT 10",
+        "SELECT id, created, regexp_extract(body, '^([^\n]*\n){4}([^\n]*)\n.*') FROM poems ORDER BY created DESC LIMIT 24",
     )
     rows = cur.fetchall()
-    r1, r2, r3, r4, r5, r6, r7, r8, r9, r10 = rows
+    r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24 = rows
 
     # Get the creation date of the oldest poem. This is used to make earlier
     # dates unselectable in the date selector on the select template.
@@ -207,7 +207,7 @@ def select():
         else:
             return redirect(url_for('read', id=row[0]))
 
-    return render_template('poem/select.html', r1=r1, r2=r2, r3=r3, r4=r4, r5=r5, r6=r6, r7=r7, r8=r8, r9=r9, r10=r10, earliest=earliest, latest=latest, message=message)
+    return render_template('poem/select.html', r1=r1, r2=r2, r3=r3, r4=r4, r5=r5, r6=r6, r7=r7, r8=r8, r9=r9, r10=r10, r11=r11, r12=r12, r13=r13, r14=r14, r15=r15, r16=r16, r17=r17, r18=r18, r19=r19, r20=r20, r21=r21, r22=r22, r23=r23, r24=r24, earliest=earliest, latest=latest, message=message)
 
 
 # Retrieve a specific poem and the IDs of the previous and next poems and
