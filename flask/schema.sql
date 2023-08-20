@@ -33,7 +33,21 @@ INSERT INTO poems (body, created) VALUES
   ('Seed poem 7', '2019-09-07 17:00:01'),
   ('Seed poem 8', '2019-09-08 17:00:01'),
   ('Seed poem 9', '2019-09-09 17:00:01'),
-  ('Seed poem 10', '2019-09-10 17:00:01')
+  ('Seed poem 10', '2019-09-10 17:00:01'),
+  ('Seed poem 11', '2019-09-11 17:00:01'),
+  ('Seed poem 12', '2019-09-12 17:00:01'),
+  ('Seed poem 13', '2019-09-13 17:00:01'),
+  ('Seed poem 14', '2019-09-14 17:00:01'),
+  ('Seed poem 15', '2019-09-15 17:00:01'),
+  ('Seed poem 16', '2019-09-16 17:00:01'),
+  ('Seed poem 17', '2019-09-17 17:00:01'),
+  ('Seed poem 18', '2019-09-18 17:00:01'),
+  ('Seed poem 19', '2019-09-19 17:00:01'),
+  ('Seed poem 20', '2019-09-20 17:00:01'),
+  ('Seed poem 21', '2019-09-21 17:00:01'),
+  ('Seed poem 22', '2019-09-22 17:00:01'),
+  ('Seed poem 23', '2019-09-23 17:00:01'),
+  ('Seed poem 24', '2019-09-24 17:00:01')
 ;
 
 INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 1';
@@ -46,3 +60,17 @@ INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 7';
 INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 8';
 INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 9';
 INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 10';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 11';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 12';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 13';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 14';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 15';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 16';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 17';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 18';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 19';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 20';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 21';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 22';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 23';
+INSERT INTO state (poem_id) SELECT id FROM poems WHERE body = 'Seed poem 24';
