@@ -153,6 +153,8 @@ def create():
             (new_poem, id)
         )
 
+    conn.commit()
+
     cur.close()
     conn.close()
     return ('', 204)
