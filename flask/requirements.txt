@@ -12,5 +12,5 @@ psycopg2-binary==2.9.6
 pytz==2023.3
 six==1.16.0
 tzlocal==5.0.1
-Werkzeug==2.3.6
+Werkzeug==3.0.1
 zipp==3.16.2
